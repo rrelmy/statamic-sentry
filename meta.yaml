@@ -1,0 +1,6 @@
+name: Sentry
+version: "1.0"
+description: Better error logging with sentry
+url: https://github.com/rrelmy/statamic-sentry
+developer: Rémy Böhler
+developer_url: https://github.com/rrelmy

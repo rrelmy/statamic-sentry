@@ -1,0 +1,7 @@
+{
+  "name": "rrelmy/statamic-sentry",
+  "description": "Sentry logging for statamic",
+  "require": {
+    "sentry/sentry-laravel": "0.7.*"
+  }
+}

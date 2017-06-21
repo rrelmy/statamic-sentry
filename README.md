@@ -1,6 +1,8 @@
 # Custom Statamic Sentry logger
 
-**USE ON YOUR OWN RISK!**
+**USE ON YOUR OWN RISK!**, this is a proof of concept.
+
+There is a [feature request](https://github.com/statamic/v2-hub/issues/1475) for statamic core support of sentry. 
 
 ## Installation
 

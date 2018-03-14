@@ -10,7 +10,7 @@ use Sentry\SentryLaravel\SentryLaravelServiceProvider;
 use Statamic\Extend\Extensible;
 
 /**
- * Class SentryServiceProvider
+ * Class SentryServiceProvider.
  * @package Statamic\Addons\Sentry
  */
 class SentryServiceProvider extends SentryLaravelServiceProvider
@@ -47,7 +47,7 @@ class SentryServiceProvider extends SentryLaravelServiceProvider
         /**
          * TODO add some more context
          *  - user
-         *  - statamic version
+         *  - statamic version.
          */
 
         // register classes
@@ -63,7 +63,7 @@ class SentryServiceProvider extends SentryLaravelServiceProvider
     }
 
     /**
-     * Check if sentry should be enabled
+     * Check if sentry should be enabled.
      *
      * @return bool
      */

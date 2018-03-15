@@ -2,6 +2,10 @@ fields:
   enable:
     type: toggle
     display: Enable
+  enable_logs:
+    type: toggle
+    display: Enable Logs
+    description: Determines whether [logs](https://docs.statamic.com/debugging#logging) are intercepted and forwarded to Sentry.
     width: 50
   environments:
     type: list

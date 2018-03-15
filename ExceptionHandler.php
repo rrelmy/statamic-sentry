@@ -26,24 +26,8 @@ class ExceptionHandler extends Handler
     {
         if ($this->shouldReport($e)) {
             $sentry = app('sentry');
-
-            // add user context
-            if (User::loggedIn()) {
-                $user = User::getCurrent();
-
-                $sentry->user_context([
-                    'id' => $user->id(),
-                    'username' => $user->username(),
-                    'email' => $user->email(),
-                    'path' => $user->path(),
-                    'status' => $user->status(),
-                ]);
-            } else {
-                $sentry->user_context(['id' => null]);
-            }
-
-            // add runtime context
-            $sentry->tags_context(['statamic_version' => STATAMIC_VERSION]);
+            $sentry->user_context(SentryContext::getUserContext());
+            $sentry->tags_context(SentryContext::getTagsContext());
 
             // capture the exception
             $sentry->captureException($e);

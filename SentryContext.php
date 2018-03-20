@@ -1,6 +1,6 @@
 <?php
 
-namespace Statamic\addons\Sentry;
+namespace Statamic\Addons\Sentry;
 
 use Statamic\API\User;
 

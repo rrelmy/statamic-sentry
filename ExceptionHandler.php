@@ -3,7 +3,7 @@
  * @author Rémy M. Böhler
  */
 
-namespace Statamic\addons\Sentry;
+namespace Statamic\Addons\Sentry;
 
 use Exception;
 use Statamic\API\User;
@@ -11,7 +11,7 @@ use Statamic\Exceptions\Handler;
 
 /**
  * Class ExceptionHandler.
- * @package Statamic\addons\Sentry
+ * @package Statamic\Addons\Sentry
  */
 class ExceptionHandler extends Handler
 {

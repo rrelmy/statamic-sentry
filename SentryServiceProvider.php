@@ -10,7 +10,7 @@ use Sentry\SentryLaravel\SentryLaravelServiceProvider;
 use Statamic\Extend\Extensible;
 
 /**
- * Class SentryServiceProvider
+ * Class SentryServiceProvider.
  * @package Statamic\Addons\Sentry
  */
 class SentryServiceProvider extends SentryLaravelServiceProvider
@@ -47,7 +47,7 @@ class SentryServiceProvider extends SentryLaravelServiceProvider
         /**
          * TODO add some more context
          *  - user
-         *  - statamic version
+         *  - statamic version.
          */
 
         // register classes
@@ -60,10 +60,27 @@ class SentryServiceProvider extends SentryLaravelServiceProvider
         );
 
         parent::register();
+
+        if (!$this->logsEnabled()) {
+            $monolog = \Log::getMonolog();
+
+            // register a monolog handler to report log entries to Sentry
+            $handler = new \Monolog\Handler\RavenHandler(app('sentry'));
+            $handler->setFormatter(new \Monolog\Formatter\LineFormatter("%message% %context% %extra%\n"));
+            $monolog->pushHandler($handler);
+
+            $monolog->pushProcessor(function ($record) {
+                // add contex to the log record
+                $record['context']['user'] = SentryContext::getUserContext();
+                $record['context']['tags'] = SentryContext::getTagsContext();
+
+                return $record;
+            });
+        }
     }
 
     /**
-     * Check if sentry should be enabled
+     * Check if sentry should be enabled.
      *
      * @return bool
      */
@@ -71,6 +88,18 @@ class SentryServiceProvider extends SentryLaravelServiceProvider
     {
         return
             $this->getConfigBool('enable', false) &&
+            in_array(app()->environment(), $this->getConfig('environments', []));
+    }
+
+    /**
+     * Check if logs should be reported.
+     *
+     * @return bool
+     */
+    private function logsEnabled()
+    {
+        return
+            $this->getConfigBool('enable_logs', false) &&
             in_array(app()->environment(), $this->getConfig('environments', []));
     }
 }
